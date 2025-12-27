@@ -1,0 +1,29 @@
+# robots.txt for 児童デイサービス コパン（COPAN）
+
+# すべての検索エンジンを許可
+User-agent: *
+Allow: /
+
+# サイトマップの場所
+Sitemap: https://copan-obihiro.com/sitemap.xml
+
+# クロール速度の調整（1秒あたり1リクエスト）
+Crawl-delay: 1
+
+# 特定のファイルを除外（必要に応じて）
+# Disallow: /admin/
+# Disallow: /private/
+
+# 主要な検索エンジンの個別設定
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Yahoo Japan
+User-agent: Yahoo! Slurp
+Allow: /
