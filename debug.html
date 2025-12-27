@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デバッグページ - ファイル読み込みテスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 デバッグページ - ファイル読み込みテスト</h1>
+    
+    <div class="test-section" id="css-test">
+        <h2>1. CSSファイルのテスト</h2>
+        <p>CSSファイルが正しく読み込まれているか確認します。</p>
+        <div id="css-indicator">テスト中...</div>
+    </div>
+    
+    <div class="test-section" id="js-test">
+        <h2>2. JavaScriptファイルのテスト</h2>
+        <p>JavaScriptファイルが正しく読み込まれているか確認します。</p>
+        <div id="js-indicator">テスト中...</div>
+    </div>
+    
+    <div class="test-section" id="font-test">
+        <h2>3. Google Fontsのテスト</h2>
+        <p style="font-family: 'Noto Sans JP', sans-serif; font-size: 18px;">
+            このテキストは「Noto Sans JP」フォントで表示されるはずです。
+        </p>
+    </div>
+    
+    <div class="test-section" id="icon-test">
+        <h2>4. Font Awesomeアイコンのテスト</h2>
+        <p>
+            <i class="fas fa-heart" style="color: red; font-size: 24px;"></i>
+            <i class="fas fa-star" style="color: gold; font-size: 24px;"></i>
+            <i class="fas fa-smile" style="color: green; font-size: 24px;"></i>
+        </p>
+        <small>アイコンが表示されない場合、Font Awesomeの読み込みに問題があります。</small>
+    </div>
+    
+    <div class="test-section" id="image-test">
+        <h2>5. 外部画像のテスト</h2>
+        <p>コパンのロゴが表示されるか確認：</p>
+        <img src="https://www.genspark.ai/api/files/s/4gKClElT" alt="コパンロゴ" style="max-width: 200px; border: 1px solid #ddd; padding: 10px;">
+    </div>
+    
+    <div class="test-section">
+        <h2>6. ファイルパスの確認</h2>
+        <p>以下のパスでファイルにアクセスできるか確認してください：</p>
+        <ul>
+            <li><code>./css/style.css</code></li>
+            <li><code>./js/main.js</code></li>
+            <li><a href="./css/style.css" target="_blank">CSSファイルを開く</a></li>
+            <li><a href="./js/main.js" target="_blank">JavaScriptファイルを開く</a></li>
+            <li><a href="./" target="_blank">index.htmlを開く</a></li>
+        </ul>
+    </div>
+
+    <!-- CSSファイル読み込みテスト -->
+    <link rel="stylesheet" href="./css/style.css" onload="cssLoaded()" onerror="cssError()">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- JavaScriptファイル読み込みテスト -->
+    <script src="./js/main.js" onload="jsLoaded()" onerror="jsError()"></script>
+    
+    <script>
+        function cssLoaded() {
+            const indicator = document.getElementById('css-indicator');
+            const section = document.getElementById('css-test');
+            indicator.innerHTML = '✅ <strong>成功:</strong> CSSファイルが正しく読み込まれています！';
+            section.classList.add('success');
+        }
+        
+        function cssError() {
+            const indicator = document.getElementById('css-indicator');
+            const section = document.getElementById('css-test');
+            indicator.innerHTML = '❌ <strong>エラー:</strong> CSSファイルの読み込みに失敗しました。パスを確認してください。';
+            section.classList.add('error');
+        }
+        
+        function jsLoaded() {
+            const indicator = document.getElementById('js-indicator');
+            const section = document.getElementById('js-test');
+            indicator.innerHTML = '✅ <strong>成功:</strong> JavaScriptファイルが正しく読み込まれています！';
+            section.classList.add('success');
+        }
+        
+        function jsError() {
+            const indicator = document.getElementById('js-indicator');
+            const section = document.getElementById('js-test');
+            indicator.innerHTML = '❌ <strong>エラー:</strong> JavaScriptファイルの読み込みに失敗しました。パスを確認してください。';
+            section.classList.add('error');
+        }
+        
+        // タイムアウト後のチェック
+        setTimeout(() => {
+            const cssIndicator = document.getElementById('css-indicator');
+            const jsIndicator = document.getElementById('js-indicator');
+            
+            if (cssIndicator.textContent === 'テスト中...') {
+                cssError();
+            }
+            
+            if (jsIndicator.textContent === 'テスト中...') {
+                jsError();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
