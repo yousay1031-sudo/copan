@@ -276,12 +276,13 @@ function submitToGoogleForm(name, phone, email, subject, message) {
     const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfq22gmsV2_tf86juFlUWMZKhYUx2KF5gjZU_pnpK5WEh6jsw/formResponse';
     
     // Googleフォームのentry IDにマッピング
+        // Googleフォームのentry IDにマッピング
     const formData = new FormData();
     formData.append('entry.701446373', name);           // お名前
     formData.append('entry.578679617', phone);          // 電話番号
-    formData.append('entry.173954784', email);          // メールアドレス
-    formData.append('entry.835707395', subject);        // お問い合わせ種類
-    formData.append('entry.613536919', message);        // お問い合わせ内容
+    formData.append('entry.1735547384', email);         // メールアドレス
+    formData.append('entry.613536919', subject);        // お問い合わせ種類
+    formData.append('entry.835707395', message);        // お問い合わせ内容
     
     // Googleフォームに送信（no-corsモードで送信）
     fetch(GOOGLE_FORM_URL, {
