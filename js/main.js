@@ -273,7 +273,7 @@ function initFormValidation() {
  * Googleフォームに送信
  */
 function submitToGoogleForm(name, phone, email, subject, message) {
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/u/0/d/1jpah51_uaXIKxOeJVGlX8UENHkGILsgCzCQO8BoETNs/formResponse';
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfq22gmsV2_tf86juFlUWMZKhYUx2KF5gjZU_pnpK5WEh6jsw/formResponse';
     
     // Googleフォームのentry IDにマッピング
     const formData = new FormData();
