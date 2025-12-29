@@ -142,8 +142,8 @@ function initScrollAnimations() {
     // Intersection Observer API を使用
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '100px', // 要素が画面に入る100px前から発動
+        threshold: 0.05 // より早く表示開始
     };
     
     const observer = new IntersectionObserver(function(entries) {
@@ -163,7 +163,7 @@ function initScrollAnimations() {
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        el.style.transition = `opacity 0.5s ease ${index * 0.08}s, transform 0.5s ease ${index * 0.08}s`;
         observer.observe(el);
     });
 }
@@ -252,6 +252,8 @@ function initFormValidation() {
             }
             
             if (isValid) {
+                // Googleフォームに送信
+                submitToGoogleForm(name, phone, email, subject, message);
                 // 送信成功メッセージ
                 showSuccessMessage();
                 // フォームをリセット
@@ -265,6 +267,32 @@ function initFormValidation() {
             }
         });
     }
+}
+
+/**
+ * Googleフォームに送信
+ */
+function submitToGoogleForm(name, phone, email, subject, message) {
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/u/0/d/1jpah51_uaXIKxOeJVGlX8UENHkGILsgCzCQO8BoETNs/formResponse';
+    
+    // Googleフォームのentry IDにマッピング
+    const formData = new FormData();
+    formData.append('entry.701446373', name);           // お名前
+    formData.append('entry.578679617', phone);          // 電話番号
+    formData.append('entry.173954784', email);          // メールアドレス
+    formData.append('entry.835707395', subject);        // お問い合わせ種類
+    formData.append('entry.613536919', message);        // お問い合わせ内容
+    
+    // Googleフォームに送信（no-corsモードで送信）
+    fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+    }).then(function() {
+        console.log('フォームが正常に送信されました');
+    }).catch(function(error) {
+        console.log('フォーム送信エラー:', error);
+    });
 }
 
 /**
