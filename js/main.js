@@ -175,20 +175,23 @@ function initFormValidation() {
     const form = document.getElementById('contactForm');
     
     if (form) {
-        // 電話番号の自動フォーマット
+               // 電話番号の自動フォーマット
         const phoneInput = document.getElementById('phone');
         if (phoneInput) {
             phoneInput.addEventListener('input', function(e) {
                 let value = e.target.value.replace(/[^\d]/g, '');
                 
                 if (value.length > 0) {
-                    // 0155-66-5395のようなフォーマット
-                    if (value.length <= 4) {
+                    // 携帯電話（090, 080, 070など）と固定電話の両方に対応
+                    if (value.length <= 3) {
                         value = value;
-                    } else if (value.length <= 6) {
-                        value = value.slice(0, 4) + '-' + value.slice(4);
+                    } else if (value.length <= 7) {
+                        value = value.slice(0, 3) + '-' + value.slice(3);
+                    } else if (value.length <= 11) {
+                        value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
                     } else {
-                        value = value.slice(0, 4) + '-' + value.slice(4, 6) + '-' + value.slice(6, 10);
+                        // 11桁を超える場合は11桁まで
+                        value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
                     }
                 }
                 
