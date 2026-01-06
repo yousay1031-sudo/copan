@@ -741,20 +741,22 @@ a {
 }
 
 .news-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 24px;
     background: white;
     border-radius: var(--radius-md);
+    padding: 25px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: inherit;
 }
 
 .news-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
+
 
 .news-date {
     font-weight: 600;
