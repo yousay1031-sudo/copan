@@ -419,10 +419,13 @@ function loadPublicNews() {
         const labelClass = item.category === 'イベント' ? 'news-label-event' : 'news-label-info';
         
         return `
-            <a href="news-detail.html?id=${item.id}" class="news-item" style="text-decoration: none; color: inherit; display: block; transition: all 0.3s ease;">
-                <span class="news-date">${formattedDate}</span>
-                <span class="news-label ${labelClass}">${item.category}</span>
-                <p class="news-text">${item.title}</p>
+            <a href="news-detail.html?id=${item.id}" class="news-item" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px; transition: all 0.3s ease;">
+                ${item.image ? `<img src="${item.image}" alt="${item.title}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; flex-shrink: 0;">` : ''}
+                <div style="flex: 1;">
+                    <span class="news-date">${formattedDate}</span>
+                    <span class="news-label ${labelClass}">${item.category}</span>
+                    <p class="news-text">${item.title}</p>
+                </div>
             </a>
         `;
     }).join('');
