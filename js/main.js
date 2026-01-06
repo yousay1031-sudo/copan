@@ -35,43 +35,6 @@ function checkAuth() {
     }
 }
 
-/**
- * ログインパネルを表示
- */
-function showLoginPanel() {
-    document.getElementById('loginContainer').style.display = 'flex';
-    document.getElementById('adminContainer').style.display = 'none';
-}
-
-/**
- * 管理パネルを表示
- */
-function showAdminPanel() {
-    document.getElementById('loginContainer').style.display = 'none';
-    document.getElementById('adminContainer').style.display = 'block';
-    loadNewsList();
-}
-
-/**
- * ログインフォームのセットアップ
- */
-function setupLoginForm() {
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('errorMessage');
-        
-        if (password === ADMIN_PASSWORD) {
-            sessionStorage.setItem(AUTH_KEY, 'true');
-            errorMessage.style.display = 'none';
-            showAdminPanel();
-        } else {
-            errorMessage.style.display = 'block';
-            document.getElementById('password').value = '';
-        }
-    });
-}
 
 /**
  * ログアウト
