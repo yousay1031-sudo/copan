@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お知らせ一覧 - コパン</title>
+    <meta name="description" content="児童デイサービス コパンのお知らせ・イベント情報をご覧いただけます。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .news-list-container {
+            max-width: 1000px;
+            margin: 100px auto 60px;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            color: #FF9F5A;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            color: #A67C5D;
+            font-size: 1.1rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(255, 159, 90, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(255, 159, 90, 0.25);
+        }
+
+        .news-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .news-card-date {
+            color: #A67C5D;
+            font-size: 0.95rem;
+        }
+
+        .news-card-label {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .news-card-label.label-info {
+            background: #A8D8F0;
+            color: #2B5C75;
+        }
+
+        .news-card-label.label-event {
+            background: #FFB4C8;
+            color: #8B2346;
+        }
+
+        .news-card-title {
+            color: #8B5A3C;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .news-card-content {
+            color: #8B5A3C;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .news-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: #FF9F5A;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .news-card-footer i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-card-footer i {
+            transform: translateX(5px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #A67C5D;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #FFB47A;
+            margin-bottom: 30px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid #FF9F5A;
+            background: white;
+            color: #FF9F5A;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #FF9F5A 0%, #FFB47A 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .news-card {
+                padding: 20px;
+            }
+
+            .news-card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="https://www.genspark.ai/api/files/s/xYU9kYIx" alt="コパン ロゴ" class="logo-img">
+                </a>
+            </div>
+            <nav class="header-nav" id="headerNav">
+                <ul class="nav-list">
+                    <li><a href="index.html#about" class="nav-link">コパンについて</a></li>
+                    <li><a href="index.html#program" class="nav-link">プログラム</a></li>
+                    <li><a href="index.html#schedule" class="nav-link">1日の流れ</a></li>
+                    <li><a href="index.html#guide" class="nav-link">ご利用案内</a></li>
+                    <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+                    <li><a href="index.html#contact" class="nav-link nav-link-cta">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="news-list-container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-bullhorn"></i> お知らせ</h1>
+            <p class="page-subtitle">コパンからのお知らせ・イベント情報をお届けします</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterNews('all')">すべて</button>
+            <button class="filter-btn" onclick="filterNews('お知らせ')">お知らせ</button>
+            <button class="filter-btn" onclick="filterNews('イベント')">イベント</button>
+        </div>
+
+        <div id="newsList">
+            <!-- JavaScriptで動的に読み込まれます -->
+            <div style="text-align: center; padding: 60px 20px; color: #A67C5D;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 20px;"></i>
+                <p>読み込み中...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://www.genspark.ai/api/files/s/xYU9kYIx" alt="コパン ロゴ" class="footer-logo-img">
+                    </div>
+                    <p class="footer-text">
+                        児童デイサービス コパン<br>
+                        一人ひとりの「できた！」を応援します
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">施設情報</h3>
+                    <ul class="footer-list">
+                        <li><i class="fas fa-map-marker-alt"></i> 北海道帯広市西十五条南１丁目１番地 TIDA 3F</li>
+                        <li><i class="fas fa-phone"></i> 0155-66-5395</li>
+                        <li><i class="fas fa-fax"></i> 0155-66-5395</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">メニュー</h3>
+                    <ul class="footer-nav">
+                        <li><a href="index.html#about">コパンについて</a></li>
+                        <li><a href="index.html#program">プログラム</a></li>
+                        <li><a href="index.html#schedule">1日の流れ</a></li>
+                        <li><a href="index.html#guide">ご利用案内</a></li>
+                        <li><a href="index.html#access">アクセス</a></li>
+                        <li><a href="index.html#contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2024 児童デイサービス コパン（COPAN）運営: 合同会社リノケア. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        let allNewsData = [];
+        let currentFilter = 'all';
+
+        // お知らせデータを読み込み
+        function loadNewsList() {
+            const newsData = localStorage.getItem('copan_news');
+            
+            if (!newsData) {
+                document.getElementById('newsList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h2 style="color: #8B5A3C; margin-bottom: 15px;">お知らせはまだありません</h2>
+                        <p>新しいお知らせをお楽しみに！</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            allNewsData = JSON.parse(newsData)
+                .filter(item => item.status === 'published')
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            filterNews('all');
+        }
+
+        // カテゴリでフィルター
+        function filterNews(category) {
+            currentFilter = category;
+            
+            // ボタンのアクティブ状態を更新
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const filteredNews = category === 'all' 
+                ? allNewsData 
+                : allNewsData.filter(item => item.category === category);
+            
+            if (filteredNews.length === 0) {
+                document.getElementById('newsList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h2 style="color: #8B5A3C; margin-bottom: 15px;">該当するお知らせがありません</h2>
+                        <p>別のカテゴリをお試しください</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            document.getElementById('newsList').innerHTML = filteredNews.map(item => {
+                const date = new Date(item.date);
+                const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                const labelClass = item.category === 'イベント' ? 'label-event' : 'label-info';
+                const contentPreview = item.content ? (item.content.length > 150 ? item.content.substring(0, 150) + '...' : item.content) : '';
+                
+                return `
+                    <a href="news-detail.html?id=${item.id}" class="news-card">
+                        ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-card-image">` : ''}
+                        <div class="news-card-header">
+                            <span class="news-card-date"><i class="far fa-calendar"></i> ${formattedDate}</span>
+                            <span class="news-card-label ${labelClass}">${item.category}</span>
+                        </div>
+                        <h2 class="news-card-title">${item.title}</h2>
+                        ${contentPreview ? `<p class="news-card-content">${contentPreview}</p>` : ''}
+                        <div class="news-card-footer">
+                            続きを読む <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // ページ読み込み時に実行
+        loadNewsList();
+    </script>
+</body>
+</html>

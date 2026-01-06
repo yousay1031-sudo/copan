@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お知らせ詳細 - コパン</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .news-detail-container {
+            max-width: 900px;
+            margin: 100px auto 60px;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #FF9F5A;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #FFB47A;
+            transform: translateX(-5px);
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .news-detail {
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 4px 20px rgba(255, 159, 90, 0.2);
+        }
+
+        .news-detail-header {
+            border-bottom: 2px solid #FFF9F0;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .news-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-detail-date {
+            color: #A67C5D;
+            font-size: 0.95rem;
+        }
+
+        .news-detail-label {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .news-detail-label.label-info {
+            background: #A8D8F0;
+            color: #2B5C75;
+        }
+
+        .news-detail-label.label-event {
+            background: #FFB4C8;
+            color: #8B2346;
+        }
+
+        .news-detail-title {
+            color: #8B5A3C;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .news-detail-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .news-detail-content {
+            color: #8B5A3C;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            white-space: pre-wrap;
+        }
+
+        .news-detail-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #FFF9F0;
+        }
+
+        .news-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #FFF9F0;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #8B5A3C;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .nav-link:hover {
+            background: #FFE5CC;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.prev {
+            justify-content: flex-start;
+        }
+
+        .nav-link.next {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .nav-link i {
+            font-size: 1.2rem;
+        }
+
+        .nav-link.prev i {
+            margin-right: 10px;
+        }
+
+        .nav-link.next i {
+            margin-left: 10px;
+        }
+
+        .nav-link-text {
+            font-size: 0.85rem;
+            color: #A67C5D;
+            margin-bottom: 5px;
+        }
+
+        .nav-link-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .news-detail {
+                padding: 30px 20px;
+            }
+
+            .news-detail-title {
+                font-size: 1.5rem;
+            }
+
+            .news-navigation {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="https://www.genspark.ai/api/files/s/xYU9kYIx" alt="コパン ロゴ" class="logo-img">
+                </a>
+            </div>
+            <nav class="header-nav" id="headerNav">
+                <ul class="nav-list">
+                    <li><a href="index.html#about" class="nav-link">コパンについて</a></li>
+                    <li><a href="index.html#program" class="nav-link">プログラム</a></li>
+                    <li><a href="index.html#schedule" class="nav-link">1日の流れ</a></li>
+                    <li><a href="index.html#guide" class="nav-link">ご利用案内</a></li>
+                    <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+                    <li><a href="index.html#contact" class="nav-link nav-link-cta">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="news-detail-container">
+        <a href="news.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> お知らせ一覧に戻る
+        </a>
+
+        <article class="news-detail" id="newsDetail">
+            <!-- JavaScriptで動的に読み込まれます -->
+            <div style="text-align: center; padding: 60px 20px; color: #A67C5D;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 20px;"></i>
+                <p>読み込み中...</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://www.genspark.ai/api/files/s/xYU9kYIx" alt="コパン ロゴ" class="footer-logo-img">
+                    </div>
+                    <p class="footer-text">
+                        児童デイサービス コパン<br>
+                        一人ひとりの「できた！」を応援します
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">施設情報</h3>
+                    <ul class="footer-list">
+                        <li><i class="fas fa-map-marker-alt"></i> 北海道帯広市西十五条南１丁目１番地 TIDA 3F</li>
+                        <li><i class="fas fa-phone"></i> 0155-66-5395</li>
+                        <li><i class="fas fa-fax"></i> 0155-66-5395</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">メニュー</h3>
+                    <ul class="footer-nav">
+                        <li><a href="index.html#about">コパンについて</a></li>
+                        <li><a href="index.html#program">プログラム</a></li>
+                        <li><a href="index.html#schedule">1日の流れ</a></li>
+                        <li><a href="index.html#guide">ご利用案内</a></li>
+                        <li><a href="index.html#access">アクセス</a></li>
+                        <li><a href="index.html#contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2024 児童デイサービス コパン（COPAN）運営: 合同会社リノケア. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // URLパラメータからお知らせIDを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const newsId = urlParams.get('id');
+
+        if (!newsId) {
+            window.location.href = 'news.html';
+        }
+
+        // お知らせデータを読み込み
+        function loadNewsDetail() {
+            const allNews = JSON.parse(localStorage.getItem('copan_news') || '[]');
+            const news = allNews.find(item => item.id == newsId);
+
+            if (!news) {
+                document.getElementById('newsDetail').innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #FFB47A; margin-bottom: 20px;"></i>
+                        <h2 style="color: #8B5A3C; margin-bottom: 15px;">お知らせが見つかりません</h2>
+                        <p style="color: #A67C5D; margin-bottom: 30px;">このお知らせは削除されたか、存在しません。</p>
+                        <a href="news.html" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #FF9F5A 0%, #FFB47A 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600;">お知らせ一覧へ</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const date = new Date(news.date);
+            const formattedDate = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+            const labelClass = news.category === 'イベント' ? 'label-event' : 'label-info';
+
+            // 前後の記事を取得
+            const publishedNews = allNews
+                .filter(item => item.status === 'published')
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            const currentIndex = publishedNews.findIndex(item => item.id == newsId);
+            const prevNews = currentIndex < publishedNews.length - 1 ? publishedNews[currentIndex + 1] : null;
+            const nextNews = currentIndex > 0 ? publishedNews[currentIndex - 1] : null;
+
+            const navigationHTML = `
+                <div class="news-navigation">
+                    ${prevNews ? `
+                        <a href="news-detail.html?id=${prevNews.id}" class="nav-link prev">
+                            <i class="fas fa-arrow-left"></i>
+                            <div>
+                                <div class="nav-link-text">前の記事</div>
+                                <div class="nav-link-title">${prevNews.title}</div>
+                            </div>
+                        </a>
+                    ` : '<div></div>'}
+                    
+                    ${nextNews ? `
+                        <a href="news-detail.html?id=${nextNews.id}" class="nav-link next">
+                            <div>
+                                <div class="nav-link-text">次の記事</div>
+                                <div class="nav-link-title">${nextNews.title}</div>
+                            </div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    ` : '<div></div>'}
+                </div>
+            `;
+
+            document.getElementById('newsDetail').innerHTML = `
+                <div class="news-detail-header">
+                    <div class="news-detail-meta">
+                        <span class="news-detail-date"><i class="far fa-calendar"></i> ${formattedDate}</span>
+                        <span class="news-detail-label ${labelClass}">${news.category}</span>
+                    </div>
+                    <h1 class="news-detail-title">${news.title}</h1>
+                </div>
+
+                ${news.image ? `<img src="${news.image}" alt="${news.title}" class="news-detail-image">` : ''}
+
+                <div class="news-detail-content">${news.content}</div>
+
+                <div class="news-detail-footer">
+                    ${navigationHTML}
+                </div>
+            `;
+
+            // ページタイトルを更新
+            document.title = `${news.title} - コパン`;
+        }
+
+        // ページ読み込み時に実行
+        loadNewsDetail();
+    </script>
+</body>
+</html>
