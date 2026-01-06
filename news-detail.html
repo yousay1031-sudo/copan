@@ -335,7 +335,7 @@
 
                 ${news.image ? `<img src="${news.image}" alt="${news.title}" class="news-detail-image">` : ''}
 
-                <div class="news-detail-content">${news.content}</div>
+                <div class="news-detail-content">${news.content.replace(/\n/g, '<br>')}</div>
 
                 <div class="news-detail-footer">
                     ${navigationHTML}
