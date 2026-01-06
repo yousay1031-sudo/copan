@@ -36,16 +36,6 @@ function checkAuth() {
 }
 
 
-/**
- * ログアウト
- */
-function logout() {
-    if (confirm('ログアウトしますか？')) {
-        sessionStorage.removeItem(AUTH_KEY);
-        showLoginPanel();
-        document.getElementById('password').value = '';
-    }
-}
 
 /**
  * お知らせデータを取得
