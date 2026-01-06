@@ -435,11 +435,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="newsImage">画像URL（任意）</label>
-                    <input type="url" id="newsImage" placeholder="https://example.com/image.jpg">
+                    <label for="newsImageFile">画像をアップロード（任意）</label>
+                    <input type="file" id="newsImageFile" accept="image/*" onchange="handleImageUpload(event)">
                     <small style="color: #A67C5D; font-size: 0.85rem; display: block; margin-top: 5px;">
-                        画像のURLを貼り付けてください
+                        画像ファイルを選択してください（JPG, PNG, GIF対応）
                     </small>
+                    <input type="hidden" id="newsImage">
+                    <div id="imagePreview" style="margin-top: 10px; display: none;">
+                        <img id="previewImg" style="max-width: 100%; max-height: 200px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -644,6 +648,7 @@ function openModal(editIndex = null) {
     const form = document.getElementById('newsForm');
     
     form.reset();
+    resetImagePreview(); // 画像プレビューをリセット
     document.getElementById('newsDate').valueAsDate = new Date();
     document.getElementById('editId').value = '';
     
@@ -660,6 +665,14 @@ function openModal(editIndex = null) {
         document.getElementById('newsContent').value = item.content || '';
         document.getElementById('newsImage').value = item.image || '';
         document.getElementById('newsStatus').value = item.status;
+        
+        // 既存の画像プレビュー表示
+        if (item.image) {
+            const previewContainer = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            previewImg.src = item.image;
+            previewContainer.style.display = 'block';
+        }
     } else {
         // 新規作成モード
         modalTitle.textContent = 'お知らせを追加';
@@ -732,6 +745,44 @@ function deleteNews(index) {
     loadNewsList();
     
     alert('お知らせを削除しました');
+}
+
+/**
+ * 画像アップロード処理
+ */
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // ファイルサイズチェック（5MB以下）
+    if (file.size > 5 * 1024 * 1024) {
+        alert('画像ファイルは5MB以下にしてください。');
+        event.target.value = '';
+        return;
+    }
+    
+    // 画像をBase64に変換
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64Image = e.target.result;
+        document.getElementById('newsImage').value = base64Image;
+        
+        // プレビュー表示
+        const previewContainer = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        previewImg.src = base64Image;
+        previewContainer.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+/**
+ * モーダルを開く時に画像プレビューをリセット
+ */
+function resetImagePreview() {
+    document.getElementById('newsImageFile').value = '';
+    document.getElementById('newsImage').value = '';
+    document.getElementById('imagePreview').style.display = 'none';
 }
 
 /**
