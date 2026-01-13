@@ -233,21 +233,34 @@
             </div>
             <div class="news-list" id="newsList">
                 <!-- 管理画面で登録したお知らせが動的に表示されます -->
-                <div class="news-item">
-                    <span class="news-date">2024.12.15</span>
-                    <span class="news-label news-label-info">お知らせ</span>
-                    <p class="news-text">年末年始の営業日についてのご案内</p>
-                </div>
-                <div class="news-item">
-                    <span class="news-date">2024.12.01</span>
-                    <span class="news-label news-label-event">イベント</span>
-                    <p class="news-text">クリスマス会を開催しました</p>
-                </div>
-                <div class="news-item">
-                    <span class="news-date">2024.11.20</span>
-                    <span class="news-label news-label-info">お知らせ</span>
-                    <p class="news-text">見学・体験のご予約を受付中です</p>
-                </div>
+                <a href="news-detail.html" class="news-item">
+                    <div style="flex: 1;">
+                        <span class="news-date">2024.12.15</span>
+                        <span class="news-label news-label-info">お知らせ</span>
+                        <p class="news-text">年末年始の営業日についてのご案内</p>
+                    </div>
+                </a>
+                <a href="news-detail.html" class="news-item">
+                    <div style="flex: 1;">
+                        <span class="news-date">2024.12.01</span>
+                        <span class="news-label news-label-event">イベント</span>
+                        <p class="news-text">クリスマス会を開催しました</p>
+                    </div>
+                </a>
+                <a href="news-detail.html" class="news-item">
+                    <div style="flex: 1;">
+                        <span class="news-date">2024.11.20</span>
+                        <span class="news-label news-label-info">お知らせ</span>
+                        <p class="news-text">見学・体験のご予約を受付中です</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="news.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 1.05rem; box-shadow: 0 4px 16px rgba(255, 159, 90, 0.3); transition: all 0.3s ease;">
+                    すべてのお知らせを見る
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
